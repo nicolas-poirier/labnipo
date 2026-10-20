@@ -1,0 +1,14 @@
+# Containerlab runtime directories
+clab-*/
+.*.clab.yml.bak
+
+# Local artefacts
+*.bak
+*.log
+.DS_Store
+
+# Never commit software or licence material
+*.qcow2
+*.tar.gz
+*.iol
+.iourc
