@@ -1,0 +1,38 @@
+! =====================================================================
+! hq-dst-01 — commutateur de distribution du siège
+! Plateforme : Cisco CML 2.10, image ioll2-xe (IOL XE 17.18.02)
+! Lab        : labnipo-campus
+! =====================================================================
+hostname hq-dst-01
+!
+no ip domain-lookup
+ip domain name labnipo.fr
+!
+ip routing
+!
+interface Ethernet0/0
+ description --- OOB management ---
+ no switchport
+ ip address 10.255.0.11 255.255.255.0
+ no shutdown
+!
+interface Ethernet0/1
+ description --- vers hq-rtr-01 ---
+ no switchport
+ ip address 10.0.255.2 255.255.255.252
+ no shutdown
+!
+ip route 172.16.40.0 255.255.255.0 10.255.0.1
+!
+username <LAB_USER> privilege 15 secret <LAB_PASSWORD>
+enable secret <ENABLE_PASSWORD>
+!
+ip ssh version 2
+!
+line con 0
+ logging synchronous
+line vty 0 4
+ login local
+ transport input ssh
+!
+end
